@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import {
   Form,
@@ -6,6 +6,8 @@ import {
   Button,
   // notification
 } from "antd";
+import { useLoginUserMutation } from "../../store/apis/authApi";
+import { useAppSelector } from "../../store";
 
 // import { ROUTER_PATHS } from "./../../constant/routePaths";
 
@@ -14,13 +16,19 @@ import {
 const SignIn = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const [loginApi, { isLoading }] = useLoginUserMutation();
+  const userRedux = useAppSelector((state) => state.user);
 
   //   const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log("userRedux:", userRedux);
+  }, [userRedux]);
+
   const handleSubmit = async () => {
-    setLoading(true);
-    console.log(phoneNumber, password);
+    // console.log(phoneNumber, password);
+    loginApi({ email: "hwa@admin.com", password: "LxGyWyL" });
   };
 
   return (
@@ -60,7 +68,7 @@ const SignIn = () => {
               type="primary"
               htmlType="submit"
               className="w-full"
-              loading={loading}
+              loading={isLoading}
             >
               সাবমিট করুন
             </Button>

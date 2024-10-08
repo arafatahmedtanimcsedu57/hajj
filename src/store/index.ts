@@ -1,27 +1,31 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { authApi } from "./api/authApi";
-import { postApi } from "./api/postApi";
-import { userApi } from "./api/userApi";
-import userReducer from "./features/userSlice";
-import postReducer from "./features/postSlice";
+import { authApi } from "./apis/authApi";
+import { userSliceReducer } from "./features/userSlice";
+// import { postApi } from "./api/postApi";
+// import { userApi } from "./api/userApi";
+// import userReducer from "./features/userSlice";
+// import postReducer from "./features/postSlice";
+
+const rootReducer = combineReducers({
+  [authApi.reducerPath]: authApi.reducer,
+  user: userSliceReducer,
+  // [userApi.reducerPath]: userApi.reducer,
+  // Connect the PostApi reducer to the store
+  // [postApi.reducerPath]: postApi.reducer,
+  // userState: userReducer,
+  // postState: postReducer,
+});
 
 export const store = configureStore({
-  reducer: {
-    [authApi.reducerPath]: authApi.reducer,
-    [userApi.reducerPath]: userApi.reducer,
-    // Connect the PostApi reducer to the store
-    [postApi.reducerPath]: postApi.reducer,
-    userState: userReducer,
-    postState: postReducer,
-  },
-  devTools: import.meta.env.VITE_NODE_ENV === "development",
+  reducer: rootReducer,
+  // devTools: import.meta.env.VITE_NODE_ENV === "development",
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({}).concat([
       authApi.middleware,
-      userApi.middleware,
+      // userApi.middleware,
       // Add the PostApi middleware to the store
-      postApi.middleware,
+      // postApi.middleware,
     ]),
 });
 

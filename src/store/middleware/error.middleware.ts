@@ -1,12 +1,12 @@
 import { type Middleware } from 'redux';
 import { isRejected } from '@reduxjs/toolkit';
 import { message } from 'antd';
-import { ERROR_STATUS_CODES } from '@/constant/statusCodes';
+// import { ERROR_STATUS_CODES } from '@/constant/statusCodes';
 
 interface DetailInnerArray {
-  ctx?: any;
+  ctx?: unknown;
   input?: string;
-  loc?: any;
+  loc?: unknown;
   msg: string;
   type?: string;
 }
@@ -33,7 +33,8 @@ export const rtkQueryErrorLogger: Middleware = () => (next) => (action) => {
           (payload.data?.detail as string),
       );
     } else {
-      message.error(ERROR_STATUS_CODES[payload?.status] || ERROR_STATUS_CODES[1010]);
+      // message.error(ERROR_STATUS_CODES[payload?.status] || ERROR_STATUS_CODES[1010]);
+      message.error('test error msg');
     }
   }
 
