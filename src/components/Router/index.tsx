@@ -6,10 +6,11 @@ import Dashboard from "../../pages/Dashboard";
 import Error404 from "./../../pages/Error";
 
 import { ROUTER_PATHS } from "../../constant/routePaths";
+import RenderOnAuthenticated from "./RenderOnAuthenticated";
 
 const { SIGN_IN, HOME } = ROUTER_PATHS;
 
-export default function Router() {
+export const getRouter = () => {
   const routes: RouteObject[] = [
     {
       id: `${SIGN_IN.LABEL}`,
@@ -24,7 +25,11 @@ export default function Router() {
         {
           id: `${HOME.LABEL}.1`,
           index: true,
-          element: <Dashboard />,
+          element: (
+            <RenderOnAuthenticated>
+              <Dashboard />
+            </RenderOnAuthenticated>
+          ),
         },
       ],
     },
@@ -36,4 +41,4 @@ export default function Router() {
   ];
 
   return createBrowserRouter(routes, { basename: "/" });
-}
+};

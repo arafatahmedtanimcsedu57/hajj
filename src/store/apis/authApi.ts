@@ -29,6 +29,7 @@ export const authApi = createApi({
         try {
           const { data } = await queryFulfilled;
           console.log("onQueryStarted || res data:", data);
+          localStorage.setItem("userData", JSON.stringify(data));
           dispatch(setUser(data));
         } catch (error) {
           /* empty */

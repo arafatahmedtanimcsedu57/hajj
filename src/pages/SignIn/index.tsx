@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Form,
   Input,
@@ -8,10 +8,11 @@ import {
 } from "antd";
 import { useLoginUserMutation } from "../../store/apis/authApi";
 import { useAppSelector } from "../../store";
+import { SignInFormDataType } from "../../typings/signIn";
 
-// import { ROUTER_PATHS } from "./../../constant/routePaths";
+import { ROUTER_PATHS } from "./../../constant/routePaths";
 
-// const { HOME } = ROUTER_PATHS;
+const { HOME } = ROUTER_PATHS;
 
 const SignIn = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -20,25 +21,32 @@ const SignIn = () => {
   const [loginApi, { isLoading }] = useLoginUserMutation();
   const userRedux = useAppSelector((state) => state.user);
 
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("userRedux:", userRedux);
-  }, [userRedux]);
-
-  const handleSubmit = async () => {
-    // console.log(phoneNumber, password);
-    loginApi({ email: "hwa@admin.com", password: "LxGyWyL" });
+  const handleSubmit: (data: SignInFormDataType) => Promise<void> = async (
+    data,
+  ): Promise<void> => {
+    loginApi(data).then((response) => {
+      console.log({ response });
+      if (response.data) {
+        navigate(HOME.PATH);
+      }
+    });
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="p-8 bg-white rounded-md shadow-md">
         <h2 className="mb-6 text-2xl font-semibold text-center">সাইন ইন</h2>
-        <Form onFinish={handleSubmit} layout="vertical">
+        <Form
+          onFinish={(data) => {
+            handleSubmit(data);
+          }}
+          layout="vertical"
+        >
           <Form.Item
-            label="মোবাইল নম্বর "
-            name="phoneNumber"
+            label="মোবাইল নম্বর"
+            name="phone"
             rules={[
               { required: true, message: "আপনার মোবাইল নম্বর ইনপুট করুন!" },
             ]}
