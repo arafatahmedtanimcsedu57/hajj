@@ -2,10 +2,12 @@ export const TIMELINE_ITEMS = [
   {
     label: "১লা সেপ্টেম্বর",
     children: "প্রিরেজিস্ট্রেশন শুরু",
+    color: "green",
   },
   {
     label: "",
     children: "আপনার প্রিরেজিস্ট্রেশন সম্পন্ন হয়েছে",
+    color: "green",
   },
   {
     label: "৩০ নভেম্বর, ২০২৪",
