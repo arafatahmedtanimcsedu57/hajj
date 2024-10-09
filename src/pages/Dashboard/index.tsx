@@ -7,7 +7,7 @@ export default function Dashboard() {
   const handleSearch = (value: string) => {
     const capitalizedValue = value.toUpperCase();
     const url = `https://prp.pilgrimdb.org/web/pilgrim-search?q=${capitalizedValue}`;
-    window.location.href = url;
+    window.open(url, "_blank");
   };
 
   return (
