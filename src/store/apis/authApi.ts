@@ -9,7 +9,9 @@ import { setUser } from "../features/userSlice";
 export const authApi = createApi({
   reducerPath: "authApi",
   // baseQuery: customFetchBase,
-  baseQuery: fetchBaseQuery({ baseUrl: "http://94.177.8.118:8068/api/v1" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://backendhwa.revlox.com/api/v1",
+  }),
 
   endpoints: (builder) => ({
     loginUser: builder.mutation<
