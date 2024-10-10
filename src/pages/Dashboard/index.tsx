@@ -36,21 +36,28 @@ export default function Dashboard() {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="flex flex-col items-center justify-center w-full h-full p-4 align-middle gap-y-6 md:w-3/4 lg:w-1/2 md:p-6 lg:p-8">
-        <Typography.Title level={4}>
-          আপনার ট্র্যাকিং ID
-          <Tooltip title="ক্লিক করুন">
-            <Button
-              size="large"
-              className="px-2 text-xl"
-              type="link"
-              onClick={() => handleSearch(trackingNumber || "")}
-            >
-              {trackingNumber}
-            </Button>
-          </Tooltip>
-        </Typography.Title>
-
-        <Timeline mode="left" items={TIMELINE_ITEMS} />
+        {trackingNumber ? (
+          <>
+            <Typography.Title level={4}>
+              আপনার ট্র্যাকিং ID
+              <Tooltip title="ক্লিক করুন">
+                <Button
+                  size="large"
+                  className="px-2 text-xl"
+                  type="link"
+                  onClick={() => handleSearch(trackingNumber || "")}
+                >
+                  {trackingNumber}
+                </Button>
+              </Tooltip>
+            </Typography.Title>
+            <Timeline mode="left" items={TIMELINE_ITEMS} />{" "}
+          </>
+        ) : (
+          <Typography.Title level={4}>
+            দুঃখিত, আপনার ট্র্যাকিং ID খুজে পাওয়া যায় নেই।
+          </Typography.Title>
+        )}
       </div>
     </div>
   );
