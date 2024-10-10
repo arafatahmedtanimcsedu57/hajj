@@ -15,7 +15,7 @@ const Layout = () => {
   const items = [
     {
       key: "1",
-      label: "হাজ্জ রেজিস্ট্রেশন",
+      label: "হজ্জ রেজিস্ট্রেশন",
     },
   ];
 

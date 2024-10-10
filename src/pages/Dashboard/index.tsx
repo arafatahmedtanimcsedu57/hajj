@@ -1,5 +1,4 @@
-import { Button, Timeline, Typography } from "antd";
-
+import { Button, Timeline, Typography, Spin } from "antd";
 import { TIMELINE_ITEMS } from "./constants";
 import { selectUser } from "../../store/features/userSlice";
 import { useAppSelector } from "../../store";
@@ -7,6 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard() {
   const [trackingNumber, setTrackingNumber] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const { user } = useAppSelector(selectUser);
 
@@ -22,7 +22,16 @@ export default function Dashboard() {
       const parsedUserData = JSON.parse(userData);
       setTrackingNumber(parsedUserData.tracking_number);
     }
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Spin spinning={loading} size="large" />
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -33,7 +42,7 @@ export default function Dashboard() {
             size="large"
             className="px-2 text-xl"
             type="link"
-            onClick={() => handleSearch(user?.tracking_number || "")}
+            onClick={() => handleSearch(trackingNumber || "")}
           >
             {trackingNumber}
           </Button>
