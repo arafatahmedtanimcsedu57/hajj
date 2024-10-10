@@ -1,4 +1,4 @@
-import { Button, Timeline, Typography, Spin } from "antd";
+import { Button, Timeline, Typography, Spin, Tooltip } from "antd";
 import { TIMELINE_ITEMS } from "./constants";
 import { selectUser } from "../../store/features/userSlice";
 import { useAppSelector } from "../../store";
@@ -38,14 +38,16 @@ export default function Dashboard() {
       <div className="flex flex-col items-center justify-center w-full h-full p-4 align-middle gap-y-6 md:w-3/4 lg:w-1/2 md:p-6 lg:p-8">
         <Typography.Title level={4}>
           আপনার ট্র্যাকিং ID
-          <Button
-            size="large"
-            className="px-2 text-xl"
-            type="link"
-            onClick={() => handleSearch(trackingNumber || "")}
-          >
-            {trackingNumber}
-          </Button>
+          <Tooltip title="ক্লিক করুন">
+            <Button
+              size="large"
+              className="px-2 text-xl"
+              type="link"
+              onClick={() => handleSearch(trackingNumber || "")}
+            >
+              {trackingNumber}
+            </Button>
+          </Tooltip>
         </Typography.Title>
 
         <Timeline mode="left" items={TIMELINE_ITEMS} />
