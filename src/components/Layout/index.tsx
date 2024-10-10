@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Layout as LayoutAntD, Menu, theme } from "antd";
-import { DesktopOutlined } from "@ant-design/icons";
+import { FormOutlined } from "@ant-design/icons";
 import Header from "./Header";
 
 const { Content, Sider, Footer } = LayoutAntD;
@@ -16,6 +16,7 @@ const Layout = () => {
     {
       key: "1",
       label: "হজ্জ রেজিস্ট্রেশন",
+      icon: <FormOutlined />,
     },
   ];
 
