@@ -5,6 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // import { userApi } from "./userApi";
 import { IUserRequest } from "../apis/types";
 import { setUser } from "../features/userSlice";
+import { notification } from "antd";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -30,11 +31,14 @@ export const authApi = createApi({
       async onQueryStarted(_args: any, { dispatch, queryFulfilled }: any) {
         try {
           const { data } = await queryFulfilled;
-          console.log("onQueryStarted || res data:", data);
+
           localStorage.setItem("userData", JSON.stringify(data));
           dispatch(setUser(data));
-        } catch (error) {
-          /* empty */
+        } catch (error: any) {
+          notification.error({
+            message: "Login Error",
+            description: error?.error?.data?.detail || "Something went wrong",
+          });
         }
       },
     }),

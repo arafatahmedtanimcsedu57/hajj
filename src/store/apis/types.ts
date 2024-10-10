@@ -17,4 +17,5 @@ export interface IUserRequest {
 export interface IUser {
   refresh?: string | null;
   access?: string | null;
+  tracking_number?: string | null;
 }
