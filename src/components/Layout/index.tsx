@@ -7,7 +7,7 @@ import Header from "./Header";
 const { Content, Sider, Footer } = LayoutAntD;
 
 const Layout = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
