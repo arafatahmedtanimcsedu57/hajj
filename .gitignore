@@ -25,4 +25,4 @@ dev-dist
 *.sw?
 
 # firebase deploy
-.firebase
+.firebase/
